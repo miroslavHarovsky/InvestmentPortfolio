@@ -14,13 +14,6 @@ abstract class BasePresenter extends Presenter
      */
     public \Nettrine\ORM\EntityManagerDecorator $entityManager;
 
-    /**
-     *
-     * @var \App\Model\EntityManagerService
-     * @inject
-     */
-    public \App\Model\EntityManagerService $entityManagerService;
-
 
     /**
      * @return \Nettrine\ORM\EntityManagerDecorator
@@ -28,13 +21,5 @@ abstract class BasePresenter extends Presenter
     public function getEntityManager(): \Nettrine\ORM\EntityManagerDecorator
     {
         return $this->entityManager;
-    }
-
-    /**
-     * @return \App\Model\EntityManagerService
-     */
-    public function getEntityManagerService(): \App\Model\EntityManagerService
-    {
-        return $this->entityManagerService;
     }
 }

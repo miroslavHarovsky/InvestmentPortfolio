@@ -23,12 +23,21 @@ security:
 
 services:
 	- App\Router\RouterFactory::createRouter
-	- App\Model\EntityManagerService
+	- App\Model\Service\Authenticator
 
-	# AdminModule
-
-	# FrontModule
-
+search:
+    adminModule:
+        in: %appDir%/AdminModule
+        classes:
+            - *Factory
+    frontModule:
+            in: %appDir%/FrontModule
+            classes:
+                - *Factory
+    repository:
+            in: %appDir%/Model/Repository
+            extends:
+                - App\Model\Repository\Repository
 
 extensions:
     console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)

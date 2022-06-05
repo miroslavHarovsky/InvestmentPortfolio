@@ -2,7 +2,7 @@
 
 namespace App\Model\Repository;
 
-use App\Model\EntityManagerService;
+use Nette\Utils\ArrayHash;
 use Nettrine\ORM\EntityManagerDecorator;
 
 abstract class Repository
@@ -14,24 +14,15 @@ abstract class Repository
      */
     private EntityManagerDecorator $entityManager;
 
-    /**
-     *
-     * @var \App\Model\EntityManagerService
-     */
-    private \App\Model\EntityManagerService $entityManagerService;
-
     public function __construct(EntityManagerDecorator $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->entityManagerService = new EntityManagerService($entityManager);
     }
 
     /**
-     * @param $entity
-     *
-     * @return mixed
+     * @param \Nette\Utils\ArrayHash $data
      */
-    protected abstract function save($entity);
+    public abstract function save(ArrayHash $data);
 
     /**
      * @return \Nettrine\ORM\EntityManagerDecorator
@@ -39,12 +30,5 @@ abstract class Repository
     public function getEntityManager(): EntityManagerDecorator
     {
         return $this->entityManager;
-    }
-    /**
-     * @return \App\Model\EntityManagerService
-     */
-    public function getEntityManagerService(): \App\Model\EntityManagerService
-    {
-        return $this->entityManagerService;
     }
 }

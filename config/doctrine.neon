@@ -6,6 +6,12 @@ extensions:
     doctrine.orm.annotations: Nettrine\ORM\DI\OrmAnnotationsExtension
     doctrine.orm.console: Nettrine\ORM\DI\OrmConsoleExtension
     doctrine.cache: Nettrine\Cache\DI\CacheExtension
+    nettrine.migrations: Nettrine\Migrations\DI\MigrationsExtension
+
+nettrine.migrations:
+  directory: %appDir%/Migrations
+  namespace: App\Migrations
+  versionsOrganization: year
 
 doctrine.orm.annotations:
     mapping:
