@@ -6,27 +6,40 @@ namespace App;
 
 use Nette\Bootstrap\Configurator;
 
-
 class Bootstrap
 {
 	public static function boot(): Configurator
 	{
+		return self::createConfigurator(
+			true
+		);
+	}
+
+	public static function bootForCli(): Configurator
+	{
+		$isDebug = isset($_SERVER['argv']) && in_array('--debug', $_SERVER['argv'], true);
+
+		return self::createConfigurator($isDebug);
+	}
+
+	private static function createConfigurator(bool|string|array $debugMode): Configurator
+	{
 		$configurator = new Configurator;
-		$appDir = dirname(__DIR__);
+		$rootDir = dirname(__DIR__);
 
-		//$configurator->setDebugMode(false); // enable for your remote IP
-		$configurator->enableTracy($appDir . '/log');
-
+		$configurator->setDebugMode($debugMode);
+		$configurator->enableTracy($rootDir . '/log', 'admin@localhost');
 		$configurator->setTimeZone('Europe/Prague');
-		$configurator->setTempDirectory($appDir . '/temp');
+		$configurator->setTempDirectory($rootDir . '/temp');
 
 		$configurator->createRobotLoader()
 			->addDirectory(__DIR__)
 			->register();
 
-		$configurator->addConfig($appDir . '/config/common.neon');
-		$configurator->addConfig($appDir . '/config/local.neon');
+		$configurator->addConfig($rootDir . '/config/common.neon');
+		$configurator->addConfig($rootDir . '/config/local.neon');
 
 		return $configurator;
 	}
+
 }

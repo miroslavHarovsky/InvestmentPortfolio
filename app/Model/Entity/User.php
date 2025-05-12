@@ -7,53 +7,39 @@ use Doctrine\ORM\PersistentCollection;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\DateTime;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="user")
- */
+#[ORM\Entity]
+#[ORM\Table(name: 'user')]
 class User extends Entity
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue
-     */
+	#[ORM\Id, ORM\GeneratedValue]
+	#[ORM\Column(type: 'integer')]
     private int $id;
 
-    /**
-     * @ORM\Column(type="string")
-     */
+	#[ORM\Column(type: 'string')]
     private string $name;
 
-    /**
-     * @ORM\Column(type="string")
-     */
+	#[ORM\Column(type: 'string')]
     private string $surname;
 
-    /**
-     * @ORM\Column(type="string")
-     */
+	#[ORM\Column(type: 'string')]
     private string $email;
 
-    /**
-     * @ORM\Column(type="string")
-     */
+	#[ORM\Column(type: 'string')]
     private string $password;
 
-    /**
-     * @ORM\ManyToMany (targetEntity="App\Model\Entity\Role", mappedBy="App\Model\Entity\User")
-     */
+
+	#[ORM\ManyToMany(
+		targetEntity: Role::class,
+		mappedBy:    'users'
+	)]
     private PersistentCollection $role;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private DateTime $lastLoginDate;
+	#[ORM\Column(type: 'datetime')]
+    private $lastLoginDate;
 
-    public function __construct(ArrayHash $data = null)
+    public function __construct(ArrayHash $data)
     {
         parent::__construct($data);
-
     }
 
     /**
@@ -150,6 +136,11 @@ class User extends Entity
     {
         $this->lastLoginDate = $lastLoginDate;
     }
+
+	public function setRole(PersistentCollection $role): void
+	{
+		$this->role = $role;
+	}
 
     /**
      * @return \App\Model\Entity\Role []

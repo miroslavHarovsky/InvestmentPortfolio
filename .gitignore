@@ -5,4 +5,5 @@ composer.lock
 temp/*
 .htaccess
 vendor
+.env
 

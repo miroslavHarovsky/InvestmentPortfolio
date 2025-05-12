@@ -3,22 +3,15 @@ namespace App\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="role")
- */
+#[ORM\Entity]
+#[ORM\Table(name: 'role')]
 class Role extends Entity
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue
-     */
+	#[ORM\Id, ORM\GeneratedValue]
+	#[ORM\Column(type: 'integer')]
     private int $id;
 
-    /**
-     * @ORM\Column(type="string")
-     */
+	#[ORM\Column(type: 'string')]
     private string $name;
 
     /**

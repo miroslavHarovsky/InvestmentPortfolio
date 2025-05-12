@@ -4,17 +4,18 @@ namespace App\Model\Entity;
 
 use Nette\Utils\ArrayHash;
 use Nette\Utils\Strings;
-
+use Doctrine\ORM\Mapping as ORM;
+#[ORM\MappedSuperclass]
 abstract class Entity
 {
     use \Nette\SmartObject;
 
-    /**
-     * @param \Nette\Utils\ArrayHash|null $data
-     *
-     * @throws \ReflectionException
-     */
-    public function __construct(ArrayHash $data = null)
+	/**
+	 * @param \Nette\Utils\ArrayHash $data
+	 *
+	 * @throws \ReflectionException
+	 */
+    public function __construct(ArrayHash $data)
     {
         $this->setData($data);
 

@@ -1,25 +1,21 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Presenters;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Nette\Application\UI\Presenter;
 
 abstract class BasePresenter extends Presenter
 {
-    use \Nette\SmartObject;
-    /**
-     *
-     * @var \Nettrine\ORM\EntityManagerDecorator
-     * @inject
-     */
-    public \Nettrine\ORM\EntityManagerDecorator $entityManager;
+	public function __construct(
+		private readonly EntityManagerInterface $entityManager,
+	) {
+		parent::__construct();
+	}
 
-
-    /**
-     * @return \Nettrine\ORM\EntityManagerDecorator
-     */
-    public function getEntityManager(): \Nettrine\ORM\EntityManagerDecorator
-    {
-        return $this->entityManager;
-    }
+	protected function getEntityManager(): EntityManagerInterface
+	{
+		return $this->entityManager;
+	}
 }

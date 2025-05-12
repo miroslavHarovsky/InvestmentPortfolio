@@ -2,33 +2,21 @@
 
 namespace App\Model\Repository;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Nette\Utils\ArrayHash;
-use Nettrine\ORM\EntityManagerDecorator;
 
 abstract class Repository
 {
-    use \Nette\SmartObject;
+	use \Nette\SmartObject;
 
-    /**
-     * @var \Nettrine\ORM\EntityManagerDecorator
-     */
-    private EntityManagerDecorator $entityManager;
+	public function __construct(
+		protected readonly EntityManagerInterface $entityManager,
+	) {}
 
-    public function __construct(EntityManagerDecorator $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
+	abstract public function save(ArrayHash $data);
 
-    /**
-     * @param \Nette\Utils\ArrayHash $data
-     */
-    public abstract function save(ArrayHash $data);
-
-    /**
-     * @return \Nettrine\ORM\EntityManagerDecorator
-     */
-    public function getEntityManager(): EntityManagerDecorator
-    {
-        return $this->entityManager;
-    }
+	protected function getEntityManager(): EntityManagerInterface
+	{
+		return $this->entityManager;
+	}
 }

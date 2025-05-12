@@ -11,20 +11,20 @@ use Nette\Security\SimpleIdentity;
 class Authenticator implements \Nette\Security\Authenticator
 {
 
-    public function __construct(private User $userRepository, private Passwords $passwords)
+    public function __construct(private readonly User $userRepository, private readonly Passwords $passwords)
     {
     }
 
-    /**
-     * @param string $user
-     * @param string $password
-     *
-     * @return \Nette\Security\IIdentity
-     * @throws \Exception
-     */
-    function authenticate(string $user, string $password): IIdentity
+	/**
+	 * @param string $username
+	 * @param string $password
+	 *
+	 * @return \Nette\Security\IIdentity
+	 * @throws \Exception
+	 */
+    function authenticate(string $username, string $password): IIdentity
     {
-        $user = $this->userRepository->getByEmail($user);
+        $user = $this->userRepository->getByEmail($username);
 
         if (!$user) {
             throw new \Exception('User not found.', IResponse::S403_FORBIDDEN);

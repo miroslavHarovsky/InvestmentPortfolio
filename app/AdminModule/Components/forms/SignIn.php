@@ -24,7 +24,7 @@ class SignIn extends \Nette\Application\UI\Form
 
     protected function populate(): SignIn
     {
-        $this->addText('email', 'Email')
+        $this->addEmail('email', 'Email')
             ->setRequired();
 
         $this->addPassword('password', 'Password')
@@ -53,7 +53,7 @@ class SignIn extends \Nette\Application\UI\Form
             $this->getPresenter()->flashMessage('Uživatel byl přihlášen', 'success');
             $this->getPresenter()->redirect('Homepage:');
         } catch (AuthenticationException $e) {
-            $this->getPresenter()->flashMessage('Špatné jméno nebo heslo', 'danger');
+            $form->addError('Špatné jméno nebo heslo');
             $this->getPresenter()->redirect('this');
         }
     }
