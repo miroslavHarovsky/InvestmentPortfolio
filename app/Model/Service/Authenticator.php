@@ -29,7 +29,7 @@ class Authenticator implements \Nette\Security\Authenticator
         if (!$user) {
             throw new \Exception('User not found.', IResponse::S403_FORBIDDEN);
         }
-        if (!$this->passwords->verify($password, $user->getPassword())) {
+        if (!$this->passwords->verify($password, $user->getHash())) {
             throw new \Exception('Invalid password.', IResponse::S403_FORBIDDEN);
         }
 

@@ -39,8 +39,5 @@ search:
             extends:
                 - App\Model\Repository\Repository
 
-extensions:
-    console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
-
 includes:
     - doctrine.neon

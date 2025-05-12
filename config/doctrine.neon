@@ -4,11 +4,11 @@ extensions:
     doctrine.orm: Nettrine\ORM\DI\OrmExtension
     doctrine.cache: Nettrine\Cache\DI\CacheExtension
     nettrine.migrations: Nettrine\Migrations\DI\MigrationsExtension
+    console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
 
 nettrine.migrations:
     directories:
-        %appDir%/Migrations: App\Migrations
-    versionsOrganization: year
+        /var/www/html/app/Migrations: App\Migrations
 
 
 doctrine.orm:

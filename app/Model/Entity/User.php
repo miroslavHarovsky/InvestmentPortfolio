@@ -25,7 +25,7 @@ class User extends Entity
     private string $email;
 
 	#[ORM\Column(type: 'string')]
-    private string $password;
+    private string $hash;
 
 
 	#[ORM\ManyToMany(
@@ -106,21 +106,15 @@ class User extends Entity
         $this->email = $email;
     }
 
-    /**
-     * @return string
-     */
-    public function getPassword(): string
-    {
-        return $this->password;
-    }
+	public function getHash(): string
+	{
+		return $this->hash;
+	}
 
-    /**
-     * @param string $password
-     */
-    public function setPassword(string $password): void
-    {
-        $this->password = $password;
-    }
+	public function setHash(string $hash): void
+	{
+		$this->hash = $hash;
+	}
 
     /**
      * @return \Nette\Utils\DateTime
